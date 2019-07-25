@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="jpa-st-01" transaction-type="RESOURCE_LOCAL">
+        <!--
+            配置使用什么ORM 产品来作为JPA的实现
+            (1.)实际上配置的是 javax.persistence.spi.PersistenceProvider 接口的实现类
+            (2.)若JPA项目中只有一个JPA的实现产品，则可以不配置该节点
+        -->
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+        <!--
+            项目中添加持久化 类
+        -->
+        <class>org.yuanxing.jpa.st01.Customer</class>
+
+
+        <!--
+		配置二级缓存的策略
+		ALL：所有的实体类都被缓存
+		NONE：所有的实体类都不被缓存.
+		ENABLE_SELECTIVE：标识 @Cacheable(true) 注解的实体类将被缓存
+		DISABLE_SELECTIVE：缓存除标识 @Cacheable(false) 以外的所有实体类
+		UNSPECIFIED：默认值，JPA 产品默认值将被使用
+		-->
+
+        
+        <!--
+            其他配置信息
+        -->
+        <properties>
+            <!--数据库连接的基本信息-->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.1.107:33066/jpa_st" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="xjxabcxc" />
+
+<!--            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa_st" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="shen714921" />-->
+
+            <!--配置 JPA 实现产品的基本属性  配置 Hibernate 的基本属性-->
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+
+            <!--配置 二级缓存相关策略 -->
+        </properties>
+
+    </persistence-unit>
+</persistence>
